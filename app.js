@@ -2,33 +2,29 @@ const directory = document.querySelector('.directory');
 const formAddContact = document.forms[0];
 const input = document.querySelector('input');
 
+//stock les boutons avec un nom de classe 'delete'
+let bts = document.getElementsByClassName('delete');
+
 let textTodo;
 
 formAddContact.onsubmit = function (e) {
     e.preventDefault();
 
     textTodo = input.value;
-
-    creerTodoList(textTodo);
+    if (textTodo.length>0){
+        creerTodoList(textTodo.trim());
+        formAddContact.reset();
+    }
 
     //stock les balises <a> en cas de click, barrer/débarrer le texte
-    let elementList = document.querySelectorAll('a');
+    let elementLists = document.querySelectorAll('a');
 
     //parcour la liste pour voir ou on a cliqué
-    for (let i = 0; i < elementList.length; i++) {
-        elementList[i].onclick = onlineDeline;
-    }
-
-    //stock les boutons avec un nom de classe 'delete'
-    let bt = document.getElementsByClassName('delete');
-
-    //Supprime les zone de texte quand le bouton 'delete' est pressé
-    for (let j = 0; j < bt.length; j++) {
-        bt[j].onclick = function () {
-            directory.removeChild(document.getElementsByClassName('todo')[j]);
-        }
+    for (let i = 0; i < elementLists.length; i++) {
+        elementLists[i].onclick = onlineDeline;
     }
 }
+
 
 //barre débarre en fonction du nom de classe
 function onlineDeline() {

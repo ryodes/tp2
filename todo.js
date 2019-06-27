@@ -15,5 +15,10 @@ function creerTodoList(text) {
     todoA.textContent = text;
     todoBt.textContent = 'Delete';
     todoBt.className = 'delete';
+    todoBt.onclick = deleteTodo;
     directory.appendChild(todoDiv);
+}
+
+function deleteTodo() {
+    directory.removeChild(this.parentElement.parentElement);
 }
